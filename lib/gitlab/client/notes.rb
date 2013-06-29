@@ -45,7 +45,7 @@ class Gitlab::Client
     # @param [Integer] merge request The ID of an issue.
     # @return [Array<Gitlab::ObjectifiedHash>]
     def merge_request_notes(project, merge_request)
-      get("/projects/#{project}/merge_reqiests/#{merge_request}/notes")
+      get("/projects/#{project}/merge_requests/#{merge_request}/notes")
     end
 
     # Return single wall note
