@@ -36,6 +36,18 @@ class Gitlab::Client
       get("/projects/#{project}/snippets/#{snippet}/notes")
     end
 
+    # Gets a list of notes for a merge request.
+    #
+    # @example
+    #   Gitlab.issue_notes(5, 10)
+    #
+    # @param [Integer, String] project The ID or code name of a project.
+    # @param [Integer] merge request The ID of an issue.
+    # @return [Array<Gitlab::ObjectifiedHash>]
+    def merge_request_notes(project, merge_request)
+      get("/projects/#{project}/merge_reqiests/#{merge_request}/notes")
+    end
+
     # Return single wall note
     #
     # @example
@@ -74,6 +86,19 @@ class Gitlab::Client
       get("/projects/#{project}/snippets/#{snippet}/notes/#{id}")
     end
 
+    # Return single merge request note
+    #
+    # @example
+    #   Gitlab.snippet_note(5, 11, 3)
+    #
+    # @param [Integer, String] project The ID or code name of a project.
+    # @param [Integer] merge request The ID of an snippet.
+    # @param [Integer] id The ID of an note.
+    # @return [Gitlab::ObjectifiedHash]
+    def merge_request_note(project, merge_request, id)
+      get("/projects/#{project}/merge_requests/#{merge_request}/notes/#{id}")
+    end
+
     # Creates a new wall note.
     #
     # @param  [Integer, String] project The ID or code name of a project.
@@ -101,6 +126,16 @@ class Gitlab::Client
     # @return [Gitlab::ObjectifiedHash] Information about created note.
     def create_snippet_note(project, snippet, body)
       post("/projects/#{project}/snippets/#{snippet}/notes", :body => {:body => body})
+    end
+
+    # Creates a new merge request note.
+    #
+    # @param  [Integer, String] project The ID or code name of a project.
+    # @param  [Integer] merge_request The ID of an issue.
+    # @param  [String] body The body of a note.
+    # @return [Gitlab::ObjectifiedHash] Information about created note.
+    def create_merge_request_note(project, merge_request, body)
+      post("/projects/#{project}/merge_requests/#{merge_request}/notes", :body => {:body => body})
     end
   end
 end
